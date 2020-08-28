@@ -3,6 +3,8 @@ package com.uk.ac.teesdie.dhs.ui.home;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
@@ -34,6 +36,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,12 +54,17 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import com.uk.ac.teesdie.dhs.Common;
 import com.uk.ac.teesdie.dhs.R;
 
+import java.io.IOException;
+import java.util.List;
+
+import static android.content.ContentValues.TAG;
 import static com.google.gson.reflect.TypeToken.get;
 
-public class HomeFragment extends Fragment implements OnMapReadyCallback {
+public class HomeFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
 
     private GoogleMap mMap;
+    private Geocoder geocoder;
 
 //Location
 
@@ -114,11 +122,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+
         init();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        geocoder = new Geocoder(getContext());
         return root;
     }
 
@@ -186,8 +196,14 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
         mMap = googleMap;
 
+
+        ///Add MArker for Reverse Gepo Coding
+
+        mMap.setOnMapLongClickListener(this);
+//        mMap.setOnMarkerClickListener(this);
+
         //Zomming Button has been take off if you need it again its below
-       // mMap.getUiSettings().setZoomControlsEnabled(true);  //** Zooming Control
+        // mMap.getUiSettings().setZoomControlsEnabled(true);  //** Zooming Control
         //REquest Permission to add Current Location
 
         Dexter.withContext(getContext())
@@ -246,6 +262,33 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 Log.e("EDMT_ERROR", "Style Parsing error");
         } catch (Resources.NotFoundException e) {
             Log.e("EDMT ERROR", e.getMessage());
+        }
+    }
+
+
+//    @Override
+//    public boolean onMarkerClick(Marker marker) {
+////        marker.remove();
+//        return true;
+//    }
+
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+
+
+        Log.d(TAG,"OnMapClick"+ latLng.toString());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latLng.latitude,latLng.longitude,1);
+
+            if (addresses.size()>0 ){
+                Address address = addresses.get(0);
+                String streetAddress = address.getAddressLine(0);
+                mMap.addMarker(new MarkerOptions()
+                        .position(latLng)
+                        .title(streetAddress));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

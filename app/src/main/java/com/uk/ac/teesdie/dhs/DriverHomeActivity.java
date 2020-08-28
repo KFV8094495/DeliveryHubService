@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Menu;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -32,6 +33,9 @@ import androidx.appcompat.widget.Toolbar;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DriverHomeActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 7171 ;
@@ -53,6 +57,7 @@ public class DriverHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.progress_bar);
         setContentView(R.layout.activity_driver_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

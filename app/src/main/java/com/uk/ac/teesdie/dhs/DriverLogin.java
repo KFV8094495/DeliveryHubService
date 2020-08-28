@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -26,6 +27,13 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.uk.ac.teesdie.dhs.Utils.UserUtils;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import io.reactivex.Completable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
 
 public class DriverLogin extends AppCompatActivity {
 
@@ -36,20 +44,26 @@ public class DriverLogin extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference driverInfoRef;
 
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+
+
     private List<AuthUI.IdpConfig> providers;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener listener;
-
-
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener fireaseAuthListener;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_login);
 
-        //init();
+//        init();
+//        delaySplashScreen();
 
         mAuth =FirebaseAuth.getInstance();
         fireaseAuthListener = firebaseAuth -> {
@@ -122,36 +136,27 @@ public class DriverLogin extends AppCompatActivity {
         });
     }
 
+//    private void delaySplashScreen() {
+//
+//
+//        progressBar.setVisibility(View.VISIBLE);
+//
+//        Completable.timer(3, TimeUnit.SECONDS,
+//                AndroidSchedulers.mainThread())
+//                .subscribe(new Action() {
+//                    @Override
+//                    public void run() throws Exception {
+//
+//                    }
+//                });
+//
+//    }
+
     //Fire Base Auth Failed , Check out later
 
 //    private void init() {
 //
-//        database = FirebaseDatabase.getInstance();
-//        driverInfoRef = database.getReference(Common.DRIVER_INFO_REFERENCE);
-//        checkUserfromFirebase();
-//    }
-//
-//    private void checkUserfromFirebase() {
-//
-//        driverInfoRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                .addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        if (snapshot.exists())
-//                        {
-//                            Toast.makeText(DriverLogin.this,"USer ALready Registered",Toast.LENGTH_SHORT).show();
-//                        }
-//                        else {
-//
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        Toast.makeText(DriverLogin.this,""+error.getMessage(),Toast.LENGTH_SHORT).show();
-//                    }
-//                });
+//        ButterKnife.bind(this);
 //    }
 
     @Override

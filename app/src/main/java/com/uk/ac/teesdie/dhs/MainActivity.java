@@ -7,6 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ProgressBar;
+
+import java.util.concurrent.TimeUnit;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import io.reactivex.Completable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,13 +32,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        init();
+
+
         mDriver = (Button) findViewById(R.id.btn_driver);
         mCustomer = (Button) findViewById(R.id.btn_customer);
 
         mDriver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,DriverLogin.class);
+                Intent intent = new Intent(MainActivity.this, DriverLogin.class);
                 startActivity(intent);
                 finish();
                 return;
@@ -39,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         mCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,CustomerLogin.class);
+                Intent intent = new Intent(MainActivity.this, CustomerLogin.class);
                 startActivity(intent);
                 finish();
                 return;
@@ -47,4 +59,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void init() {
+
+    }
 }
