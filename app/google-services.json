@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "157269978030",
+    "firebase_url": "https://deliveryhubservice-7e4fc.firebaseio.com",
+    "project_id": "deliveryhubservice-7e4fc",
+    "storage_bucket": "deliveryhubservice-7e4fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157269978030:android:e2a34cc225c39b90fc363f",
+        "android_client_info": {
+          "package_name": "com.uk.ac.teesdie.dhs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157269978030-uagcv5i5i2oe0e7ehq7ie417siv2rlmh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPsfg4G12eYDjpH5ozL6gpJKo3O_5WlBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157269978030-uagcv5i5i2oe0e7ehq7ie417siv2rlmh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

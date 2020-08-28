@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">DeliveryHubService</string>
+    <string name="title_activity_driver_home">DriverHomeActivity</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="action_settings">Settings</string>
+
+
+    <!--    Here i will customize my own Button-->
+    <string name="menu_camera">Scan</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_send_parcel">Send Parcel</string>
+    <string name="menu_track_parcel">Track Parcel</string>
+    <string name="menu_sign_out">Sign Out</string>
+</resources>
